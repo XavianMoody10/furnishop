@@ -413,10 +413,15 @@ li {
   max-width: 544px;
   width: 90%;
 }
+.new-products-text__anchor {
+  display: none;
+  color: black;
+}
 
 .new-products-slider {
   width: 100%;
   overflow-x: scroll;
+  user-select: none;
 }
 .new-products-slider::-webkit-scrollbar {
   display: none;
@@ -459,6 +464,9 @@ li {
     justify-content: space-around;
     max-width: 200px;
   }
+  .new-products-text__anchor {
+    display: inline;
+  }
   .new-products-slider__slide {
     width: 200px;
     font-size: 1.2rem;
@@ -484,6 +492,47 @@ li {
   }
   .new-products-text__subheading {
     max-width: 90%;
+  }
+}
+.best-furniture-section {
+  width: 85%;
+  max-width: 544px;
+  margin: 70px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.best-furniture-text__subheadline {
+  margin-top: 10px;
+}
+
+@media (min-width: 1024px) {
+  .best-furniture-section {
+    margin-top: 120px;
+    flex-direction: row;
+    align-items: center;
+    max-width: none;
+    gap: 70px;
+    max-width: 870px;
+  }
+  .best-furniture-image {
+    max-width: 390px;
+  }
+}
+@media (min-width: 1280px) {
+  .best-furniture-section {
+    max-width: 1152px;
+    justify-content: space-between;
+    gap: 0;
+    width: 90%;
+  }
+  .best-furniture-text {
+    max-width: 550px;
+    width: auto;
+  }
+  .best-furniture-image {
+    max-width: 500px;
   }
 }
 
