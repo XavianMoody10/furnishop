@@ -519,6 +519,7 @@ li {
   .new-products-section {
     margin-top: 130px;
   }
+
   .new-products-section__inner {
     max-width: 1152px;
     margin: 0 auto;
@@ -584,6 +585,10 @@ li {
   .best-furniture-text {
     max-width: 550px;
     width: auto;
+
+    &__subheadline {
+      margin-top: 30px;
+    }
   }
 
   .best-furniture-image {

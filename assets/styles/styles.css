@@ -531,6 +531,9 @@ li {
     max-width: 550px;
     width: auto;
   }
+  .best-furniture-text__subheadline {
+    margin-top: 30px;
+  }
   .best-furniture-image {
     max-width: 500px;
   }
