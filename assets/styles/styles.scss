@@ -1,4 +1,5 @@
 // --------- RESET ---------
+@use "partials/fonts.scss";
 
 * {
   margin: 0;
@@ -13,6 +14,17 @@ a {
 
 li {
   list-style: none;
+}
+
+// --------- UTILITIES ---------
+.text--lg {
+  @include fonts.lgtext();
+}
+.text--md {
+  @include fonts.mdtext();
+}
+.text--sm {
+  @include fonts.smtext();
 }
 
 // --------- HEADER ---------
@@ -341,13 +353,6 @@ li {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  &__subheading {
-    font-size: 1.25rem;
-  }
-
-  &__subheadline {
-    font-size: 0.8rem;
-  }
 }
 
 .benefits {
@@ -373,29 +378,13 @@ li {
 
   &__description {
     margin-top: 10px;
-    line-height: 1.2rem;
-    font-size: 0.7rem;
   }
 }
 
 @media (min-width: 640px) {
-  .about-text {
-    &__subheading {
-      font-size: 1.7rem;
-    }
-
-    &__subheadline {
-      font-size: 0.9rem;
-    }
-  }
-
   .benefits {
     &__main-point {
       font-size: 1rem;
-    }
-
-    &__description {
-      font-size: 0.8rem;
     }
   }
 }
@@ -423,16 +412,6 @@ li {
     max-width: 450px;
   }
 
-  .about-text {
-    &__subheading {
-      font-size: 2.5rem;
-    }
-
-    &__subheadline {
-      font-size: 1.2rem;
-    }
-  }
-
   .benefits {
     &__main-point {
       font-size: 1.1rem;
@@ -440,11 +419,6 @@ li {
 
     &__icon {
       font-size: 1.1rem;
-    }
-
-    &__description {
-      font-size: 1rem;
-      line-height: 1.5rem;
     }
   }
 }
