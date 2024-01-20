@@ -5,10 +5,12 @@ function sliderFunctionality() {
   let currentPosition = 0;
   let scrollingTimer;
 
-  function calculateClosestMultiple(number, width, gap) {
+  // CALCULATE THE CLOSEST MULTIPLE OF A NUMBER
+  function calculateClosestMultiple(number, width) {
     return Math.round(number / width) * width;
   }
 
+  // GET THE GAP VALUE OF A SLIDE CONTAINER
   function getTheGap(slides) {
     const slide = slides[0];
     let containerStyles = window.getComputedStyle(slide);
@@ -18,6 +20,7 @@ function sliderFunctionality() {
     return numericValue;
   }
 
+  // UPDATE PAGINATION TRACKER WHEN SLIDE IN INTERACTED
   function updatePagination(paginations, sliderWidth) {
     [...paginations].forEach((p, i) => {
       if (i === Math.floor(currentPosition / sliderWidth)) {
@@ -28,29 +31,37 @@ function sliderFunctionality() {
     });
   }
 
+  // PERFORM SCROLL SNAP WHEN INTERACTING WITH SLIDER
+  function scrollSnap(slider, slides, paginations) {
+    const sliderWidth = slider.offsetWidth;
+    const gapValue = getTheGap(slides);
+    const fullScrollLength = sliderWidth + gapValue;
+
+    const newPos = calculateClosestMultiple(
+      slider.scrollLeft,
+      fullScrollLength
+    );
+
+    currentPosition = newPos;
+
+    slider.scrollTo({ left: currentPosition, behavior: "smooth" });
+
+    updatePagination(paginations, sliderWidth);
+  }
+
+  // THIS IS EXCLUSIVELY FOR SLIDERS ON TOUCH DEVICES
   function touchScrollingSnap(slider, slides, paginations) {
+    // WAIT UNTILE SLIDER IS FINISHED SCROLLING BEFORE EXECUTING EVENT
     slider.addEventListener("scroll", () => {
       clearTimeout(scrollingTimer);
 
       scrollingTimer = setTimeout(() => {
-        const sliderWidth = slider.offsetWidth;
-        const gapValue = getTheGap(slides);
-        const fullScrollLength = sliderWidth + gapValue;
-
-        const newPos = calculateClosestMultiple(
-          slider.scrollLeft,
-          fullScrollLength
-        );
-
-        currentPosition = newPos;
-
-        slider.scrollTo({ left: currentPosition, behavior: "smooth" });
-
-        updatePagination(paginations, sliderWidth);
+        scrollSnap(slider, slides, paginations);
       }, 200);
     });
   }
 
+  // NEXT ARROW EVENT
   function nextArrowEvent(slider, slides, paginations) {
     const sliderWidth = slider.offsetWidth;
     const gapValue = getTheGap(slides);
@@ -59,6 +70,7 @@ function sliderFunctionality() {
     updatePagination(paginations, sliderWidth);
   }
 
+  // PREV ARROW EVENT
   function prevArrowEvent(slider, slides, paginations) {
     const sliderWidth = slider.offsetWidth;
     const gapValue = getTheGap(slides);
@@ -115,9 +127,12 @@ function sliderFunctionality() {
       }
     });
 
-    slider.addEventListener("mouseup", () => {
-      touchScrollingSnap(slider, slides, paginations);
-      console.log("touch");
+    slider.addEventListener("mouseup", (e) => {
+      scrollSnap(slider, slides, paginations);
+    });
+
+    slider.addEventListener("mouseleave", (e) => {
+      scrollSnap(slider, slides, paginations);
     });
   }
 
