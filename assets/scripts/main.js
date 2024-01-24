@@ -1,5 +1,39 @@
 "use strict";
 
+function toggleMobileMenu() {
+  const openIcon = document.querySelector(".open-icon");
+  const closeIcon = document.querySelector(".close-icon");
+  const navigation = document.querySelector(".navigation");
+  const anchors = document.querySelectorAll(".navigation__anchor");
+  let isOpen = false;
+
+  function animationEvent() {
+    if (!isOpen) {
+      navigation.style.transform = "translateX(0)";
+      isOpen = true;
+    } else {
+      navigation.style.transform = "translateX(-100%)";
+      isOpen = false;
+    }
+
+    iconsAppearance();
+  }
+
+  function iconsAppearance() {
+    openIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+  }
+
+  openIcon.addEventListener("click", animationEvent);
+  closeIcon.addEventListener("click", animationEvent);
+
+  // anchors.forEach((a) => {
+  //   a.addEventListener("click", animationEvent);
+  // });
+}
+
+toggleMobileMenu();
+
 // APPLY SLIDER FUNCTIONALITY
 function sliderFunctionality() {
   let currentPosition = 0;
@@ -67,7 +101,10 @@ function sliderFunctionality() {
     const gapValue = getTheGap(slides);
     currentPosition += sliderWidth + gapValue;
     slider.scrollTo({ left: currentPosition, behavior: "smooth" });
-    updatePagination(paginations, sliderWidth);
+
+    if (paginations) {
+      updatePagination(paginations, sliderWidth);
+    }
   }
 
   // PREV ARROW EVENT
@@ -76,7 +113,10 @@ function sliderFunctionality() {
     const gapValue = getTheGap(slides);
     currentPosition -= sliderWidth + gapValue;
     slider.scrollTo({ left: currentPosition, behavior: "smooth" });
-    updatePagination(paginations, sliderWidth);
+
+    if (paginations) {
+      updatePagination(paginations, sliderWidth);
+    }
   }
 
   function newProductsSlider() {
@@ -89,6 +129,7 @@ function sliderFunctionality() {
     });
   }
 
+  // THIS IS FOR THE ALL PRODUCTS SLIDER
   function allProductsSlider() {
     const slider = document.querySelector(".all-products-slider");
     const slides = document.querySelectorAll(".all-products-slider__slide");
@@ -136,8 +177,29 @@ function sliderFunctionality() {
     });
   }
 
+  //THIS IS FOR THE TESTIMONIAL SLIDER
+  function testimonialSlider() {
+    const arrows = document.querySelectorAll(".testimonial-pagination__icon");
+    const slider = document.querySelector(".testimonial-slider");
+    const slides = document.querySelectorAll(".testimonial-slide");
+
+    const prevArrow = arrows[0];
+    const nextArrow = arrows[1];
+
+    nextArrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      nextArrowEvent(slider, slides);
+    });
+
+    prevArrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      prevArrowEvent(slider, slides);
+    });
+  }
+
   allProductsSlider();
   newProductsSlider();
+  testimonialSlider();
 }
 
 sliderFunctionality();
