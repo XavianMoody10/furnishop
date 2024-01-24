@@ -1335,8 +1335,6 @@ $newProducts: 1, 2, 3, 1, 2, 3;
 
 @media (min-width: 1280px) {
   .footer {
-    // max-width: 1280px;
-
     &__inner {
       max-width: 1280px;
       gap: 130px;

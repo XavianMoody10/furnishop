@@ -4,7 +4,6 @@ function toggleMobileMenu() {
   const openIcon = document.querySelector(".open-icon");
   const closeIcon = document.querySelector(".close-icon");
   const navigation = document.querySelector(".navigation");
-  const anchors = document.querySelectorAll(".navigation__anchor");
   let isOpen = false;
 
   function animationEvent() {
@@ -26,10 +25,6 @@ function toggleMobileMenu() {
 
   openIcon.addEventListener("click", animationEvent);
   closeIcon.addEventListener("click", animationEvent);
-
-  // anchors.forEach((a) => {
-  //   a.addEventListener("click", animationEvent);
-  // });
 }
 
 toggleMobileMenu();
@@ -98,24 +93,29 @@ function sliderFunctionality() {
   // NEXT ARROW EVENT
   function nextArrowEvent(slider, slides, paginations) {
     const sliderWidth = slider.offsetWidth;
-    const gapValue = getTheGap(slides);
-    currentPosition += sliderWidth + gapValue;
-    slider.scrollTo({ left: currentPosition, behavior: "smooth" });
 
-    if (paginations) {
-      updatePagination(paginations, sliderWidth);
+    if (slider.scrollWidth - sliderWidth !== currentPosition) {
+      const gapValue = getTheGap(slides);
+      currentPosition += sliderWidth + gapValue;
+      slider.scrollTo({ left: currentPosition, behavior: "smooth" });
+
+      if (paginations) {
+        updatePagination(paginations, sliderWidth);
+      }
     }
   }
 
   // PREV ARROW EVENT
   function prevArrowEvent(slider, slides, paginations) {
-    const sliderWidth = slider.offsetWidth;
-    const gapValue = getTheGap(slides);
-    currentPosition -= sliderWidth + gapValue;
-    slider.scrollTo({ left: currentPosition, behavior: "smooth" });
+    if (currentPosition !== 0) {
+      const sliderWidth = slider.offsetWidth;
+      const gapValue = getTheGap(slides);
+      currentPosition -= sliderWidth + gapValue;
+      slider.scrollTo({ left: currentPosition, behavior: "smooth" });
 
-    if (paginations) {
-      updatePagination(paginations, sliderWidth);
+      if (paginations) {
+        updatePagination(paginations, sliderWidth);
+      }
     }
   }
 
