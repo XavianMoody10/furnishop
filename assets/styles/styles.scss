@@ -1240,6 +1240,7 @@ $newProducts: 1, 2, 3, 1, 2, 3;
 .footer-line {
   position: absolute;
   top: 150px;
+  display: none;
 }
 
 .footer-top {
@@ -1313,6 +1314,10 @@ $newProducts: 1, 2, 3, 1, 2, 3;
 @media (min-width: 768px) {
   .footer-bottom {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-line {
+    display: inline;
   }
 }
 

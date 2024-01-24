@@ -1085,6 +1085,7 @@ li {
 .footer-line {
   position: absolute;
   top: 150px;
+  display: none;
 }
 
 .footer-top {
@@ -1149,6 +1150,9 @@ li {
 @media (min-width: 768px) {
   .footer-bottom {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-line {
+    display: inline;
   }
 }
 @media (min-width: 1024px) {
